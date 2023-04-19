@@ -6,7 +6,7 @@ import {
 import Header from "./components/Header";
 import {BrowserRouter as Router, Route, Link, Routes, } from 'react-router-dom';
 import Home from "./components/Home.jsx";
-import Movies from "./components/Movies.jsx";
+import Movies from "./components/movie/Movies.jsx";
 import Food from "./components/food/Food.jsx";
 
 

@@ -41,6 +41,10 @@ const Home = () => {
             justifyContent: 'center',
             alignItems: 'center',
             textDecoration: 'none',
+            "@media screen and (max-width: 768px)": {
+                height: '80vh',
+
+            }
         }}>
             <Stack spacing={2}
                    direction={"column"}
