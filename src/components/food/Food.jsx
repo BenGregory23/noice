@@ -78,7 +78,8 @@ const Food = ({ food }) => {
 
         if (!state.dataLoaded) {
             console.log("fetching data");
-            fetch("http://localhost:3000/places")
+             // fetch("http://localhost:3000/places")
+            fetch("https://noice-bengregory.herokuapp.com/places")
                 .then((response) => response.json())
                 .then((data) => {
                     let features = [];
@@ -152,7 +153,12 @@ const Food = ({ food }) => {
                         alignItems: "center",
                         height: "20%",
                         "@media (max-width: 600px)": {
-                            paddingBottom: "2rem",
+                            position : "fixed",
+                            bottom : 0,
+                            width : "100vw",
+                            backgroundColor : "white",
+                            height : "10%",
+                            borderTop : "1px solid #e0e0e0",
 
                         }
                     }}
