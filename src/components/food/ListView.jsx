@@ -23,18 +23,24 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
         },
         "@media (max-width: 600px)": {
             height: '5rem',
+            width: '85%',
         }
     }
 
     const listStyle = {
         width: '100%',
-        height: '100%',
+        height: '300px',
         "@media (max-width: 600px)": {
-            height: '300px',
+            height: '100%',
             width: '100%',
             overflowY: 'scroll',
             overflowX: 'hidden',
             padding: '0',
+            //backgroundColor: "red",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginBottom: '5rem',
 
         }
     }
@@ -81,6 +87,11 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
     return (
         <Box sx={{
             margin: 5,
+            "@media (max-width: 600px)": {
+                maxHeight: "300px",
+                width: "100%",
+                margin: "10px 0",
+            }
 
         }}>
             <List sx={listStyle}>
