@@ -4,7 +4,7 @@ import {
   CssVarsProvider, Stack, Typography
 } from "@mui/joy";
 import Header from "./components/Header";
-import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Routes, } from 'react-router-dom';
 import Home from "./components/Home.jsx";
 import Movies from "./components/Movies.jsx";
 import Food from "./components/food/Food.jsx";
