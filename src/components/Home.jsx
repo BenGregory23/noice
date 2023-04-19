@@ -1,5 +1,6 @@
 import {Box, Stack, Typography} from "@mui/joy";
 import {Link} from "react-router-dom";
+import "../../src/css/textAnimation.css"
 
 const Home = () => {
 
@@ -64,8 +65,10 @@ const Home = () => {
                             fontSize: "5rem",
                         },
                         userSelect: 'none',
-                    }}>
-                       FOOD
+                    }}
+                        className={"trackedText"}
+                    >
+                            FOOD
                     </Typography>
                 </Link>
                 <Link to={"/movies"} style={{textDecoration: 'none'}}>
@@ -82,8 +85,10 @@ const Home = () => {
                             fontSize: "5rem",
                         },
                         userSelect: 'none',
-                    }}>
-                        MOVIES
+                    }}
+                                className={"trackedText"}
+                    >
+                             MOVIES
                     </Typography>
                 </Link>
             </Stack>

@@ -3,6 +3,7 @@ import Menu from "./Menu.jsx";
 import Burger from "./Burger.jsx";
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import "../../src/css/textAnimation.css"
 
 
 const Header = () => {
@@ -23,7 +24,9 @@ const Header = () => {
                    },
                      cursor: 'pointer',
                    transition: 'all 0.2s ease-in-out',
-               }} >
+               }}
+                className={"trackedTitle"}
+               >
                      Noice.
                 </Typography>
                 </Link>

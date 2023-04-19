@@ -71,7 +71,8 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
 
 
     const removePlace = (restaurant) => {
-        fetch(`http://localhost:3000/places/${restaurant.properties.id}`, {
+        //fetch(`http://localhost:3000/places/${restaurant.properties.id}`, {
+        fetch(`https://noice-bengregory.herokuapp.com/places/${restaurant.properties.id}`, {
             method: 'DELETE',
         }).then((response) => {
             if (response.status === 200) {
