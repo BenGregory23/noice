@@ -28,8 +28,8 @@ const Header = () => {
                 </Typography>
                 </Link>
             </Stack>
-            <Burger open={open} setOpen={setOpen}/>
-            <Menu open={open} setOpen={setOpen}/>
+            {/*<Burger open={open} setOpen={setOpen}/>*/}
+            {/*<Menu open={open} setOpen={setOpen}/>*/}
         </Box>
     )
 }

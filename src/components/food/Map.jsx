@@ -6,12 +6,13 @@ import {useEffect, useState} from "react";
 const Map = ({foods, selectedRestaurant, dispatch}) => {
     const [mapObject, setMapObject] = useState(null);
     const [popup, setPopup] = useState(null);
+    const [mapLoaded, setMapLoaded] = useState(false);
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuY2hvY28iLCJhIjoiY2xnbDJld2luMWxpeDNxcnJrcW83MXZncSJ9.MUWgzTvs3FpJDboxR9p84w';
 
 
     useEffect(() => {
+
         if(mapObject === null) {
-            console.log("MAP");
             const map = new mapboxgl.Map({
                 container: 'map', // container ID
                 style: 'mapbox://styles/mapbox/streets-v12', // style URL
@@ -54,7 +55,7 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
                     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                     }
-                    let popupContent = '<div>' + description + '</div><button onclick="window.open(\'https://your-website.com/your-page\', \'_blank\')">Go to page</button>';
+                    let popupContent = '<div>' + description + '</div>';
 
                     new mapboxgl.Popup()
                         .setLngLat(coordinates)
@@ -74,16 +75,25 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
                 map.on('mouseleave', 'places', () => {
                     map.getCanvas().style.cursor = '';
                 });
-
-
+                setMapLoaded(true);
+                dispatch({ type: "MAP_LOADED", map: map });
             });
 
             setMapObject(map);
+
+        }
+
+        //if foods change, update the map
+        if(mapObject !== null && mapLoaded) {
+            mapObject.getSource('places').setData({
+                type: "FeatureCollection",
+                features: foods,
+            });
         }
 
 
         if(selectedRestaurant){
-            
+
             if(popup) popup.remove();
             // add a popup
             let popupTmp = new mapboxgl.Popup()
@@ -101,18 +111,23 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
 
 
     return (
-        <Box id={'map'}
-             sx={{
-                                zIndex: 1,
-                                margin: 5,
-                                width: '50%',
-                                borderRadius: 10,
-             }}>
+        <Box sx={{
+            zIndex: 1,
+            margin: 5,
+            width: "50%",
+            borderRadius: 10,
+            "@media (max-width: 600px)": {
+                width: "90%",
+                height: "50%",
+                margin: 1,
+
+            }
+        }}
+            id={"map"}
+        >
         </Box>
+
     )
-
-
-
 }
 
 export default Map

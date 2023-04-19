@@ -9,10 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
     "@mui/joy": "^5.0.0-alpha.71",
+    "lucide-react": "^0.162.0",
     "mapbox-gl": "^2.14.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
