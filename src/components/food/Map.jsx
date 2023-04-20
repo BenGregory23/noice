@@ -55,6 +55,8 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
                     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                     }
+
+                    // display description + rating in popup + coordinates
                     let popupContent = '<div>' + description + '</div>';
 
                     new mapboxgl.Popup()
@@ -96,9 +98,12 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
 
             if(popup) popup.remove();
             // add a popup
+            //display description + rating in popup + coordinates
+            let popupContent = '<div>' + selectedRestaurant.properties.description + '</div>';
+
             let popupTmp = new mapboxgl.Popup()
                 .setLngLat(selectedRestaurant.geometry.coordinates)
-                .setHTML(selectedRestaurant.properties.description)
+                .setHTML(popupContent)
                 .addTo(mapObject);
             setPopup(popupTmp);
             mapObject.flyTo({

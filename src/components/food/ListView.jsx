@@ -66,8 +66,9 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
         if (window.innerWidth < 600) {
             setIsPhone(true);
         }
+        console.log(selectedRestaurant)
 
-    },[]);
+    },[selectedRestaurant]);
 
 
     const removePlace = (restaurant) => {
@@ -98,7 +99,7 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
             <List sx={listStyle}>
                 {foods.map((food, id) => (
                     <Sheet key={id} variant={"outlined"} sx={
-                                selectedRestaurant && selectedRestaurant.geometry.coordinates[0] === food.geometry.coordinates[0] && selectedRestaurant.geometry.coordinates[1] === food.geometry.coordinates[1] ?
+                                selectedRestaurant && selectedRestaurant.properties.id === food.properties.id ?
                                     selectedListItemStyle : listItemStyle}>
 
                         <ListItem key={food.id}  sx={{
@@ -106,7 +107,19 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
                             height: '100%',
                             padding: 2.5,
                         }} onClick={() => handleRestaurantClick(food)}>
-                            <Stack direction={isPhone ? "column" : "row"}>
+                            <Stack direction={isPhone ? "column" : "row"}
+                                sx={{
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    "@media (max-width: 600px)": {
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }
+                                }}
+                            >
                                 <Typography level={"body1"} fontSize={"1.2rem"} sx={typographyStyle}>
                                     {food.properties.description}
                                 </Typography>
