@@ -4,9 +4,15 @@ import AddMovie from "./AddMovie.jsx";
 import { useEffect, useReducer, useState } from "react";
 
 const movieListStyle = {
+    height: '80vh',
     width: '100%',
-    height: '100%',
     overflowY: 'scroll',
+    paddingTop: '1rem',
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: '4rem',
 
 }
 
@@ -77,13 +83,18 @@ const Movies = ({}) => {
         <Box
             sx={{
                 width: '100%',
-                height: '100%',
+                overflowY: 'hidden',
+                
+
                 }}
         >
-            <Stack
+            <Stack direction={"column"}
                 sx={{
+                    width: "100%",
+                    display: "flex",
+                   
                     "@media (max-width: 600px)": {
-                        display: "flex",
+                        paddingLeft: 0,
                         height: "100%",
                         flexDirection: "column-reverse",
                         justifyContent:"space-between",
@@ -91,6 +102,17 @@ const Movies = ({}) => {
                     }
                 }}
             >
+                
+                <Box
+                    sx={movieListStyle}
+                >
+                    
+                    {state.movies.map((movie) => (
+                        <Movie key={movie._id} movie={movie} dispatch={dispatch}/>
+                    ))}
+                 
+                </Box>
+
                 <Stack
                     direction={"row"}
                     spacing={2}
@@ -98,14 +120,17 @@ const Movies = ({}) => {
                         width: "100%",
                         justifyContent: "center",
                         alignItems: "center",
-                        height: "20%",
+                        padding : "1rem",
+                        backgroundColor : "white",
+                        borderTop : "1px solid #e0e0e0",
+                        height: "fit-content",
+                        position : "fixed",
+                        bottom : 0,
                         "@media (max-width: 600px)": {
-                            position : "fixed",
-                            bottom : 0,
+                           
+                            padding : "0.2rem",
                             width : "100vw",
-                            backgroundColor : "white",
                             height : "10%",
-                            borderTop : "1px solid #e0e0e0",
                             zIndex: 10000,
                         }
                     }}
@@ -117,18 +142,7 @@ const Movies = ({}) => {
                             </Option>
                         ))}
                     </Select>
-                    <AddMovie/>
-                </Stack>
-                <Stack
-                    sx={movieListStyle}
-                >
-                    <Movie movie={movieExample}/>
-                    <Movie movie={movieExample}/>
-                    <Movie movie={movieExample}/>
-                    <Movie movie={movieExample}/>
-                    <Movie movie={movieExample}/>
-                    <Movie movie={movieExample}/>
-                    <Movie movie={movieExample}/>
+                    <AddMovie dispatch={dispatch}/>
                 </Stack>
             </Stack>
         </Box>

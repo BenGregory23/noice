@@ -1,18 +1,30 @@
 import {AspectRatio, Card, CardOverflow, Chip, Divider, Typography} from "@mui/joy";
+import { useEffect, useState } from "react";
+import searchMovieByTitle from "../../utils/searchMovieByTitle";
 
 
 const Movie = ({ movie }) => {
+    const [posterUrl, setPosterUrl] = useState('');
+
+    useEffect(() => {
+        // Example usage: search for the poster of the movie "The Dark Knight"
+        searchMovieByTitle(movie.title)
+        .then(posterUrl => {
+            setPosterUrl(posterUrl);
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    }, [movie])
 
     return(
-        <Card variant="outlined" sx={{ width: 320, m:1 }}>
+        <Card variant="outlined" sx={{ width: 270, m:2, cursor: "pointer" }}>
             <CardOverflow>
-                <AspectRatio ratio="2">
-                    <img
-                        src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-                        srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
-                        loading="lazy"
-                        alt="Movie Cover"
-                    />
+                <AspectRatio ratio="0.8">
+                  
+                    <img src={posterUrl} alt={movie.title}/>
                 </AspectRatio>
             </CardOverflow>
             <Typography level="h2" sx={{ fontSize: 'md', mt: 2 }}>
@@ -38,6 +50,9 @@ const Movie = ({ movie }) => {
                 <Divider orientation="vertical" />
                 <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
                     {
+                        // if movie.tags is an array map else avoid 
+                        typeof movie.tags === 'object' ? 
+                
                         movie.tags.map((tag) => (
                             <Chip variant={"outlined"} size={"sm"} sx={{
                                 mx:0.2
@@ -45,8 +60,10 @@ const Movie = ({ movie }) => {
                                 {tag}
                             </Chip>
                         ))
+                        : null
                     }
                 </Typography>
+               
             </CardOverflow>
         </Card>
     )

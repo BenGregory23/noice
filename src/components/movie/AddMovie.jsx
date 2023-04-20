@@ -35,14 +35,33 @@ const genreOptions = [
 ];
 
 
-const AddMovie = () => {
+const AddMovie = ({dispatch}) => {
     const [addModalOpen, setAddModalOpen] = useState(false);
     const [movie, setMovie] = useState({
         title: "",
         year: "",
-        rating: "",
-        tags: "",
+        rating: 3,
+        tags: ['drama', 'crime', 'classic'],
     });
+
+    const addMovie = () => {
+        console.log(movie);
+        fetch("https://noice-bengregory.herokuapp.com/movies", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(movie),
+        }).then((response) => {
+            console.log(response);
+            dispatch({ type: "ADD_MOVIE", movie: movie });
+            
+            setAddModalOpen(false);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    }
 
 
     return (
@@ -89,6 +108,7 @@ const AddMovie = () => {
                     </Typography>
                     <Stack spacing={1}>
                         <Input placeholder={"Titre"} type={"text"}  onChange={(e) => setMovie({...movie, title: e.target.value})}/>
+                        <Input placeholder={"Année"} type={"number"} onChange={(e) => setMovie({...movie, year: e.target.value})}/>
                         <Select placeholder={"Genre"}>
                             {genreOptions.map((option) => (
                                 <Option key={option.value} value={option.value}> {option.label} </Option>
@@ -97,7 +117,7 @@ const AddMovie = () => {
 
                         <Rating value={movie.rating} onChange={(e) => setPlace({...movie, rating: e.target.value})}/>
 
-                        <Button color={"success"} >
+                        <Button color={"success"} onClick={addMovie}>
                             Ajouter
                         </Button>
                     </Stack>
