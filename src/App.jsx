@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Link, Routes, } from 'react-router-dom';
 import Home from "./components/Home.jsx";
 import Movies from "./components/movie/Movies.jsx";
 import Food from "./components/food/Food.jsx";
+import NotFound from './components/NotFound.jsx';
 
 
 
@@ -25,9 +26,11 @@ function App() {
                 <Router>
                     <Header/>
                     <Routes>
+                        <Route path="*" element={<NotFound/>} />
                         <Route path="/" element={<Home />} />
                         <Route path="/movies" element={<Movies />} />
                         <Route path={"/food"} element={<Food/>} />
+                        
                     </Routes>
                 </Router>
             </CssVarsProvider>
