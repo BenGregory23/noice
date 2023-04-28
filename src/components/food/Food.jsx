@@ -118,7 +118,7 @@ const Food = ({ food }) => {
             direction={isPhone ? "column" : "row"}
             sx={{
                 width: "100%",
-                height: "100%",
+                height: "90vh",
                 display: "flex",
                 "@media (max-width: 600px)": {
                     height: "100%",

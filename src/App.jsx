@@ -9,8 +9,7 @@ import Home from "./components/Home.jsx";
 import Movies from "./components/movie/Movies.jsx";
 import Food from "./components/food/Food.jsx";
 import NotFound from './components/NotFound.jsx';
-
-
+import Choose from "./components/food/choose.jsx";
 
 
 
@@ -30,7 +29,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/movies" element={<Movies />} />
                         <Route path={"/food"} element={<Food/>} />
-                        
+                        <Route path={"/food/choose"} element={<Choose/>}/>
                     </Routes>
                 </Router>
             </CssVarsProvider>
