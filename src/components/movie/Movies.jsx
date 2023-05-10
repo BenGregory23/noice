@@ -73,7 +73,11 @@ const Movies = ({}) => {
         <Box
             sx={{
                 width: '100%',
-                overflowY: 'hidden',
+                overflowY: 'auto',
+                // mac 
+                '&::-webkit-scrollbar': {
+                    display: 'none',
+                },
                 }}
         >
             <Stack direction={"column"}

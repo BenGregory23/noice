@@ -45,7 +45,8 @@ const Movie = ({ movie, dispatch }) => {
     const overviewStyle = {
         display: "none",
        
-         
+                    //blur
+                    backdropFilter: "blur(5px)",
                     borderRadius: "0.6rem",
                     padding: "1rem",
                     position:"absolute", 
@@ -57,13 +58,22 @@ const Movie = ({ movie, dispatch }) => {
                     justifyContent: "center",
                     alignItems: "center",
                     userSelect: "none",
-                  
+                    //Animation keyframes
+                    animation: "fadeIn 0.3s ease-in-out",
+                    //Animation keyframes
+                    "@keyframes fadeIn": {
+                        "0%": {
+                            opacity: 0,
+                        },
+                        "100%": {
+                            opacity: 1,
+                        },
+                    },                  
     }
 
 
 
     
-
     const showOverview = () => {
         console.log("show overview")
         const overview = document.getElementById("overview"+ movie._id);
@@ -78,14 +88,24 @@ const Movie = ({ movie, dispatch }) => {
     }
 
     return(
-        <Card onClick={showOverview} variant="outlined" sx={{ width: 270, height: 480, m:2, cursor: "pointer" }}>
-            <CardOverflow sx={{
-               
-            }}>
+        <Card onClick={showOverview} variant="outlined" sx={{ width: 270, height: 480, m:2, cursor: "pointer" }}
+        onMouseEnter={()=>{
+            const overview = document.getElementById("overview"+ movie._id);
+            overview.style.display = "flex";
+        }}
+        onMouseLeave={()=>{
+            const overview = document.getElementById("overview"+ movie._id);
+            overview.style.display = "none";
+        }}
+        >
+            
+            <CardOverflow>
                 <AspectRatio ratio="0.7">
                     <img src={posterUrl} alt={movie.title}/>
                 </AspectRatio>
             </CardOverflow>
+            
+         
             
                 <Stack 
                     sx={{
