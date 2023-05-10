@@ -16,6 +16,7 @@ import {
 import {PlusSquareIcon} from "lucide-react";
 import {useState} from "react";
 import Rating from "../Rating.jsx";
+import { searchMovieYearByTitle } from "../../utils/searchMovie.js";
 
 const genreOptions = [
     { value: "action", label: "Action" },
@@ -45,21 +46,41 @@ const AddMovie = ({dispatch}) => {
     });
 
     const addMovie = () => {
-        console.log(movie);
-        fetch("https://noice-bengregory.herokuapp.com/movies", {
+
+       searchMovieYearByTitle(movie.title).then((response) => {
+            if(response === undefined){
+                response = "0000";
+            }
+            response = response.substring(0, 4);
+            console.log(response);
+            const movieObject ={
+                title: movie.title,
+                year: response,
+                rating: movie.rating,
+                tags: movie.tags,
+            }
+            setMovie({...movie, year: response});
+            fetch("https://noice-bengregory.herokuapp.com/movies", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(movie),
+            body: JSON.stringify(movieObject),
         }).then((response) => {
             console.log(response);
-            dispatch({ type: "ADD_MOVIE", movie: movie });
-            
+            dispatch({ type: "ADD_MOVIE", movie: movieObject });
             setAddModalOpen(false);
         }).catch((error) => {
             console.log(error);
         });
+        }).catch((error) => {
+            console.log(error);
+        });
+
+
+
+        
+        
 
     }
 
@@ -108,6 +129,12 @@ const AddMovie = ({dispatch}) => {
                     </Typography>
                     <Stack spacing={1}>
                         <Input placeholder={"Titre"} type={"text"}  onChange={(e) => setMovie({...movie, title: e.target.value})}/>
+                        
+                       {
+                        /*
+
+                  
+
                         <Input placeholder={"Année"} type={"number"} onChange={(e) => setMovie({...movie, year: e.target.value})}/>
                         <Select placeholder={"Genre"}>
                             {genreOptions.map((option) => (
@@ -116,7 +143,8 @@ const AddMovie = ({dispatch}) => {
                         </Select>
 
                         <Rating value={movie.rating} onChange={(e) => setPlace({...movie, rating: e.target.value})}/>
-
+                        */
+                    }
                         <Button color={"success"} onClick={addMovie}>
                             Ajouter
                         </Button>

@@ -38,7 +38,7 @@ function movieReducer(state, action) {
         case "ADD_MOVIE":
             return { ...state, movies: [...state.movies, action.movie] };
         case "REMOVE_MOVIE":
-            const newMovies = state.movies.filter((movie) => movie.id !== action.movie.id);
+            const newMovies = state.movies.filter((movie) => movie._id !== action.id);
             return { ...state, movies: newMovies };
         case "ADD_MOVIES":
             return { ...state, movies: action.movies };
@@ -56,18 +56,8 @@ const Movies = ({}) => {
     });
 
 
-    const movieExample = {
-        id: 1,
-        title: 'The Godfather',
-        year: 1972,
-        tags: ['drama', 'crime', 'classic'],
-        rating:'Good',
-    }
-
     useEffect(() => {
-
         if (!state.dataLoaded) {
-            console.log("fetching data");
             // fetch("http://localhost:3000/movies")
             fetch("https://noice-bengregory.herokuapp.com/movies")
                 .then((response) => response.json())
@@ -77,15 +67,13 @@ const Movies = ({}) => {
                     dispatch({ type: "SET_DATA_LOADED", dataLoaded: true });
                 });
         }
-    }, [state.dataLoaded, dispatch]); // Add 'dispatch' to the dependency array
+    }, [state.dataLoaded, dispatch, state.movies]); // Add 'dispatch' to the dependency array
 
     return(
         <Box
             sx={{
                 width: '100%',
                 overflowY: 'hidden',
-                
-
                 }}
         >
             <Stack direction={"column"}
