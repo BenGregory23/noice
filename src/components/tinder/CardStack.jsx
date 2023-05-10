@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Swipeable from 'react-swipeable';
+
 
 const Card = ({ image, name, description }) => {
   return (
@@ -26,27 +26,8 @@ const CardStack = ({ cards }) => {
   };
 
   return (
-    <Swipeable
-      onSwipedLeft={() => handleSwipe('left')}
-      onSwipedRight={() => handleSwipe('right')}
-    >
-      {cards.map((card, index) => (
-        <div
-          key={card.id}
-          className={`card-container ${
-            index === currentIndex ? 'current' : ''
-          }`}
-        >
-          {index >= currentIndex && (
-            <Card
-              image={card.image}
-              name={card.name}
-              description={card.description}
-            />
-          )}
-        </div>
-      ))}
-    </Swipeable>
+    <>
+    </>
   );
 };
 
