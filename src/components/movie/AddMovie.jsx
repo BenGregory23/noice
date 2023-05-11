@@ -117,34 +117,10 @@ const AddMovie = ({dispatch}) => {
                             bgcolor: 'background.body',
                         }}
                     />
-                    <Typography
-                        component="h2"
-                        id="modal-title"
-                        level="h4"
-                        textColor="inherit"
-                        fontWeight="lg"
-                        mb={1}
-                    >
-                        Ajout d'un nouveau film ou série
-                    </Typography>
+                    
                     <Stack spacing={1}>
                         <Input placeholder={"Titre"} type={"text"}  onChange={(e) => setMovie({...movie, title: e.target.value})}/>
                         
-                       {
-                        /*
-
-                  
-
-                        <Input placeholder={"Année"} type={"number"} onChange={(e) => setMovie({...movie, year: e.target.value})}/>
-                        <Select placeholder={"Genre"}>
-                            {genreOptions.map((option) => (
-                                <Option key={option.value} value={option.value}> {option.label} </Option>
-                            ))}
-                        </Select>
-
-                        <Rating value={movie.rating} onChange={(e) => setPlace({...movie, rating: e.target.value})}/>
-                        */
-                    }
                         <Button color={"success"} onClick={addMovie}>
                             Ajouter
                         </Button>
