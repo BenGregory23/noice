@@ -113,6 +113,7 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
                                     height: '100%',
                                     display: 'flex',
                                     justifyContent: 'space-between',
+                                    alignItems: 'center',
                                     "@media (max-width: 600px)": {
                                         flexDirection: 'column',
                                         alignItems: 'center',
@@ -123,18 +124,23 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
                                 <Typography level={"body1"} fontSize={"1.2rem"} sx={typographyStyle}>
                                     {food.properties.description}
                                 </Typography>
-                                <Rating value={food.properties.rating} />
+                                {
+                                     //<Rating value={food.properties.rating} />
+                                }
+                                <Button size={isPhone ? "sm" : "md"} 
+                                        variant={"plain"} color={"danger"} 
+                                        onClick={()=>removePlace(food)}
+                                >
+                                <XSquare size={isPhone ? 16 : 24} />
+                            </Button>
+                               
                             </Stack>
 
                         </ListItem>
 
 
 
-                        <Button size={
-                            isPhone ? "sm" : "md"
-                        } variant={"outlined"} color={"danger"} onClick={()=>removePlace(food)}>
-                            <XSquare size={isPhone ? 16 : 24} />
-                        </Button>
+                        
                     </Sheet>
 
 
