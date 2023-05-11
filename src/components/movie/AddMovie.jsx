@@ -118,12 +118,25 @@ const AddMovie = ({dispatch}) => {
                         }}
                     />
                     
-                    <Stack spacing={1}>
-                        <Input placeholder={"Titre"} type={"text"}  onChange={(e) => setMovie({...movie, title: e.target.value})}/>
-                        
-                        <Button color={"success"} onClick={addMovie}>
+                    <Stack spacing={2}>
+                        <Input placeholder={"Titre"} type={"text"}  onChange={(e) => setMovie({...movie, title: e.target.value})}
+                            endDecorator={
+                                <Button
+                                color="success"
+                                    
+                                    onClick={() => addMovie()}
+                                >
+                                    Ajouter
+                                </Button>}
+                        />
+                        {
+                            /*
+                            <Button color={"success"} onClick={addMovie}>
                             Ajouter
                         </Button>
+                        */
+                        }
+                        
                     </Stack>
 
                 </Sheet>
