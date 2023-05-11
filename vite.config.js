@@ -1,20 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { copy } from 'fs-extra';
+import { resolve } from 'path';
+import { copyFileSync } from 'fs';
 
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
+    outDir: 'dist',
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
         manualChunks: undefined,
       },
     },
-    // Copy the _redirects file to the build output directory
-    afterBuild: async () => {
-      await copy('_redirects', 'dist/_redirects');
-    },
+  },
+  // Hook to copy the _redirects file after build
+  afterBuild: () => {
+    const redirectsSource = resolve(__dirname, '_redirects');
+    const redirectsDestination = resolve(__dirname, 'dist', '_redirects');
+    copyFileSync(redirectsSource, redirectsDestination);
   },
 })

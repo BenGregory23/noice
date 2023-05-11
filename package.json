@@ -11,9 +11,10 @@
   "dependencies": {
     "@mui/icons-material": "^5.11.11",
     "@mui/joy": "^5.0.0-alpha.71",
-    "fs-extra": "^11.1.1",
+    "fs": "^0.0.1-security",
     "lucide-react": "^0.162.0",
     "mapbox-gl": "^2.14.1",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
