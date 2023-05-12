@@ -35,8 +35,6 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
         height: '300px',
         "@media (max-width: 600px)": {
             height: '110%',
-
-            border: "2px solid #e0e0e0",
             width: '100%',
             overflowY: 'scroll',
             overflowX: 'hidden',
