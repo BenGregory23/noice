@@ -49,7 +49,7 @@ function movieReducer(state, action) {
     }
 }
 
-const Movies = ({}) => {
+const Movies = ({mode}) => {
     const [state, dispatch] = useReducer(movieReducer, {
         movies: [],
         dataLoaded: false,
@@ -100,7 +100,7 @@ const Movies = ({}) => {
                 >
                     
                     {state.movies.map((movie) => (
-                        <Movie key={movie._id} movie={movie} dispatch={dispatch}/>
+                        <Movie mode={mode} key={movie._id} movie={movie} dispatch={dispatch}/>
                     ))}
                  
                 </Box>
@@ -113,8 +113,9 @@ const Movies = ({}) => {
                         justifyContent: "center",
                         alignItems: "center",
                         padding : "1rem",
-                        backgroundColor : "white",
-                        borderTop : "1px solid #e0e0e0",
+                        backgroundColor : mode === "dark" ? "black" : "#fff",
+                        borderTop : mode === "dark" ? "1px solid #242424" : "1px solid #e0e0e0",
+                    
                         height: "fit-content",
                         position : "fixed",
                         bottom : 0,

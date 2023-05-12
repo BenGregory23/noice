@@ -1,16 +1,8 @@
 import {
     Stack,
     Box,
-    List,
-    ListItem,
-    Button,
-    Modal,
-    Sheet,
-    ModalClose,
-    Typography,
-    Input,
     RadioGroup,
-    FormLabel, Radio, FormControl
+    Radio, FormControl
 } from "@mui/joy";
 import Map from "./Map.jsx";
 import ListView from "./ListView.jsx";
@@ -59,7 +51,7 @@ const createFeatureFromPlace = (place) => {
 
 
 
-const Food = ({ food }) => {
+const Food = ({ food, mode }) => {
     const [filter, setFilter] = useState("tout");
     const [isPhone, setIsPhone] = useState(false);
 
@@ -143,7 +135,7 @@ const Food = ({ food }) => {
                 }}
             >
                 {/* Pass the handleRestaurantClick function to the ListView component */}
-                <ListView dispatch={dispatch} foods={filteredFoods} handleRestaurantClick={handleRestaurantClick} selectedRestaurant={state.selectedRestaurant} />
+                <ListView  mode={mode} dispatch={dispatch} foods={filteredFoods} handleRestaurantClick={handleRestaurantClick} selectedRestaurant={state.selectedRestaurant} />
                 <Stack
                     direction={"row"}
                     spacing={2}
@@ -222,7 +214,7 @@ const Food = ({ food }) => {
 
             {/* Pass the selectedRestaurant property and the dispatch function to the Map component */}
             {
-                state.dataLoaded ?  <Map selectedRestaurant={state.selectedRestaurant} dispatch={dispatch} foods={state.foods} />
+                state.dataLoaded ?  <Map mode={mode} selectedRestaurant={state.selectedRestaurant} dispatch={dispatch} foods={state.foods} />
                     : null
             }
 

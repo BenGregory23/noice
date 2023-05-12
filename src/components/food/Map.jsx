@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {useEffect, useState} from "react";
 
-const Map = ({foods, selectedRestaurant, dispatch}) => {
+const Map = ({foods, selectedRestaurant, dispatch, mode}) => {
     const [mapObject, setMapObject] = useState(null);
     const [popup, setPopup] = useState(null);
     const [mapLoaded, setMapLoaded] = useState(false);
@@ -11,13 +11,16 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
 
 
     useEffect(() => {
-
+        
         if(mapObject === null) {
             const map = new mapboxgl.Map({
                 container: 'map', // container ID
-                style: 'mapbox://styles/mapbox/streets-v12', // style URL
+                //style: 'mapbox://styles/mapbox/streets-v12', // style URL
+                style: mode === "dark" ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/streets-v12',
                 center: [3.1, 45.78], // starting position [lng, lat]
                 zoom: 11, // starting zoom
+                // dark mode
+
             });
 
             map.on('load', () => {
@@ -68,6 +71,10 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
                     dispatch({type: "SELECT_RESTAURANT", restaurant: e.features[0]});
                 });
 
+
+                
+
+
                 // Change the cursor to a pointer when the mouse is over the places layer.
                 map.on('mouseenter', 'places', () => {
                     map.getCanvas().style.cursor = 'pointer';
@@ -113,6 +120,12 @@ const Map = ({foods, selectedRestaurant, dispatch}) => {
             });
         }
     }, [foods, selectedRestaurant, dispatch]);
+
+    useEffect(() => {
+        if(mapObject !== null && mapLoaded) {
+            mapObject.setStyle(mode === "dark" ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/streets-v12');
+        }
+    }, [mode]);
 
 
     return (

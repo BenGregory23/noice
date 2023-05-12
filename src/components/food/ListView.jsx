@@ -2,8 +2,9 @@ import {Box, Button, List, ListItem, Stack, Typography, Sheet} from "@mui/joy";
 import {useEffect, useState} from "react";
 import Rating from "../Rating.jsx";
 import {XSquare} from "lucide-react";
+import { Beer, Utensils, Orbit, Pizza } from 'lucide-react';
 
-const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }) => {
+const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, mode }) => {
     const [isPhone, setIsPhone] = useState(false);
 
     const listItemStyle = {
@@ -13,13 +14,15 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: mode === "light" ? '#ffffff' : "black",
         borderRadius: '5px',
+        borderColor: mode === "light" ? '#e5e5e5' : "#25252d",
+        color : mode === "light" ? 'black' : "white",
         cursor: 'pointer',
         marginBottom: '0.4rem',
         transition: 'all 0.2s ease-in-out',
         '&:hover': {
-            backgroundColor: '#e5e5e5',
+            backgroundColor: mode === "light" ? '#e5e5e5' : "#25252d",
         },
         "@media (max-width: 600px)": {
             height: '5rem',
@@ -47,12 +50,11 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
 
     const selectedListItemStyle = {
         ...listItemStyle,
-        backgroundColor: '#e5e5e5',
-
+        backgroundColor: mode === "light" ? '#e5e5e5' : "#25252d",
     }
 
     const typographyStyle = {
-        color: '#25252d',
+        color: mode === "light" ? 'black' : "white",
         fontWeight: '600',
         width: "70%",
         "@media (max-width: 600px)": {
@@ -60,19 +62,21 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
         }
     }
 
+    const iconColor = mode === "light" ? 'black' : "white";
+
 
     useEffect(() => {
-        console.log(foods)
+        
         if (window.innerWidth < 600) {
             setIsPhone(true);
         }
-        console.log(selectedRestaurant)
+       
 
     },[selectedRestaurant]);
 
 
     const removePlace = (restaurant) => {
-        //fetch(`http://localhost:3000/places/${restaurant.properties.id}`, {
+       
         fetch(`https://noice-bengregory.herokuapp.com/places/${restaurant.properties.id}`, {
             method: 'DELETE',
         }).then((response) => {
@@ -107,28 +111,41 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
                             height: '100%',
                             padding: 2.5,
                         }} onClick={() => handleRestaurantClick(food)}>
-                            <Stack direction={isPhone ? "column" : "row"}
+                            <Stack 
                                 sx={{
                                     width: '100%',
                                     height: '100%',
                                     display: 'flex',
+                                    flexDirection: 'row',
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
-                                    "@media (max-width: 600px)": {
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                    }
+                            
                                 }}
                             >
+                                {
+                                    food.properties.icon === "fast-food" ?
+                                        <Pizza color={iconColor} size={isPhone ? 20 : 24} /> :
+                                        food.properties.icon === "restaurant" ?
+                                            <Utensils color={iconColor} size={isPhone ? 20 : 24} /> :
+                                            food.properties.icon === "bar" ?
+                                                <Beer color={iconColor} size={isPhone ? 20 : 24} /> :
+                                                null
+
+                                }
                                 <Typography level={"body1"} fontSize={"1.2rem"} sx={typographyStyle}>
                                     {food.properties.description}
                                 </Typography>
-                                {
-                                     //<Rating value={food.properties.rating} />
-                                }
+                                
+                                
                                 <Button size={isPhone ? "sm" : "md"} 
-                                        variant={"plain"} color={"danger"} 
+                                        variant={"contained"}
+                                        sx={{
+                                            transition: "all 0.2s ease-in-out",
+                                            color: mode === "light" ? 'black' : "white",
+                                            "&:hover": {
+                                                color: "red",
+                                            },
+                                        }} 
                                         onClick={()=>removePlace(food)}
                                 >
                                 <XSquare size={isPhone ? 16 : 24} />
@@ -137,10 +154,6 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch }
                             </Stack>
 
                         </ListItem>
-
-
-
-                        
                     </Sheet>
 
 

@@ -64,7 +64,7 @@ const AddFood = ({dispatch}) => {
 
         dispatch({ type: "ADD_FOOD", place: feature }); // Change 'dbObject' to 'place: feature'
 
-        fetch("http://localhost:3000/places", {
+        fetch("https://noice-bengregory.herokuapp.com/places", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

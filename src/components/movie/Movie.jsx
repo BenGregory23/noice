@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {searchMovieByTitle, searchMovieDescriptionByTitle} from "../../utils/searchMovie";
 
 
-const Movie = ({ movie, dispatch }) => {
+const Movie = ({ movie, dispatch, mode }) => {
     const [posterUrl, setPosterUrl] = useState('');
     const [overview, setOverview] = useState(false);
 
@@ -88,7 +88,17 @@ const Movie = ({ movie, dispatch }) => {
     }
 
     return(
-        <Card onClick={showOverview} variant="outlined" sx={{ width: 270, height: 480, m:2, cursor: "pointer" }}
+        <Card onClick={showOverview} variant="outlined" sx={{ width: 270, height: 480, m:2, cursor: "pointer", 
+        backgroundColor: mode === "dark" ? "#1f1f1f" : "#fff",
+        border: mode === "dark" ? "1px solid #1f1f1f" : "",
+        
+        
+      
+
+        
+        
+        
+    }}
         onMouseEnter={()=>{
             const overview = document.getElementById("overview"+ movie._id);
             overview.style.display = "flex";
@@ -112,13 +122,20 @@ const Movie = ({ movie, dispatch }) => {
                         height: "fit-content",
                     }}
                 >
-                    <Typography level="h2" sx={{ fontSize: 'md', mt: 1.3 }}>
+                    <Typography level="h2" 
+                        sx={{   fontSize: 'md', mt: 1.3, 
+                                color: mode === "dark" ? "#fff" : "#000",
+                 }}>
                         {
                             //max 20 characters
                         }
                         {movie.title.length > 20 ? movie.title.substring(0, 20) + "..." : movie.title}
                     </Typography>
-                    <Typography level="body2" sx={{ mt: 0.5, mb: 0 }}>
+                    <Typography level="body2" sx={{ 
+                        mt: 0.5, 
+                        mb: 0,
+                        color: mode === "dark" ? "#fff" : "#000",
+                    }}>
                         {movie.year}
                     </Typography>
                    
@@ -145,8 +162,6 @@ const Movie = ({ movie, dispatch }) => {
                                 Delete
                             </Button>
                         </Stack>
-                        
-                    
             </Box>
             
         </Card>

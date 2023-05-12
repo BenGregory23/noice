@@ -1,8 +1,13 @@
 import {Box, Stack, Typography} from "@mui/joy";
 import {Link} from "react-router-dom";
 import "../../src/css/textAnimation.css"
+import { useEffect } from "react";
 
-const Home = () => {
+const Home = ({mode}) => {
+
+    useEffect(() => {
+        console.log(mode)
+    }, [mode])
 
 
     const beforeCssFood = {
@@ -62,9 +67,9 @@ const Home = () => {
                         "padding": "0",
                         "text-transform": "uppercase",
                         "position": "relative",
-                        "color": "#25252d",
                         "&:before": beforeCssFood,
                         "&:hover:before": hoverCss,
+                        color: mode === "light" ? "#25252d" : "#ffffff",
                         "@media screen and (max-width: 768px)": {
                             fontSize: "5rem",
                         },
@@ -82,7 +87,7 @@ const Home = () => {
                         "padding": "0",
                         "text-transform": "uppercase",
                         "position": "relative",
-                        "color": "#25252d",
+                        color: mode === "light" ? "#25252d" : "#ffffff",
                         "&:before": beforeCssMovies,
                         "&:hover:before": hoverCss,
                         "@media screen and (max-width: 768px)": {
