@@ -116,7 +116,9 @@ const Food = ({ food, mode }) => {
                     height: "100%",
                     flexDirection: "column-reverse",
                     alignItems: "center",
-                }
+                },
+                maxHeight: "90vh",
+                
             }}
         >
 

@@ -135,9 +135,10 @@ const Map = ({foods, selectedRestaurant, dispatch, mode}) => {
             width: "50%",
             borderRadius: 10,
             "@media (max-width: 600px)": {
-                width: "90%",
-                height: "50%",
+                width: "85%",
+                height: "45%",
                 margin: 1,
+                
 
             }
         }}
