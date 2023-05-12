@@ -2,6 +2,7 @@ import {Box, Stack, Typography} from "@mui/joy";
 import {Link} from "react-router-dom";
 import "../../src/css/textAnimation.css"
 import { useEffect } from "react";
+    
 
 const Home = ({mode}) => {
 
@@ -100,7 +101,9 @@ const Home = ({mode}) => {
                              MOVIES
                     </Typography>
                 </Link>
+               
             </Stack>
+            
         </Box>
     );
 }

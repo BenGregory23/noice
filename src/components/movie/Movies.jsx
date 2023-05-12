@@ -2,6 +2,7 @@ import {Box, Option, Select, Stack} from "@mui/joy";
 import Movie from "./Movie.jsx";
 import AddMovie from "./AddMovie.jsx";
 import { useEffect, useReducer, useState } from "react";
+import Loader from "../Loader.jsx";
 
 const movieListStyle = {
     height: '80vh',
@@ -80,6 +81,9 @@ const Movies = ({mode}) => {
                 },
                 }}
         >
+           {
+                !state.dataLoaded ? <Loader /> : null
+           }
             <Stack direction={"column"}
                 sx={{
                     width: "100%",
