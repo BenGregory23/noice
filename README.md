@@ -34,7 +34,7 @@ Production is deployed on Netlify.
 
 - User authentication
 
-** Do whatever you want**
+**Do whatever you want**
 
 Don't worry about deleting or adding movies, I regularly clean the database with just one command ! 
 
