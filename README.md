@@ -9,6 +9,10 @@ I wanted a simple React project that works well on all devices and has a good ae
 
 
 
+https://github.com/BenGregory23/noice/assets/61834092/ee5e8cd6-4318-4c51-a892-1de54c2de249
+
+
+
 ## Deployment
 
 To deploy this project run
