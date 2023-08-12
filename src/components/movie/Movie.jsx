@@ -152,7 +152,14 @@ const Movie = ({ movie, dispatch, mode }) => {
                                 {movie.title}
                             </Typography>
                             <Typography level="body2" sx={{ mt: 0.5, mb: 2,color: "white" }}>
-                                {overview}
+
+                                {
+                                    //max 400 characters
+                                    overview.length > 600 ? overview.substring(0, 600) + "..." : overview
+                                }
+                                
+                                
+
                             </Typography>
                             <Button size="sm" onClick={() => {removeMovie()}}
                                 sx={{
