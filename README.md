@@ -6,6 +6,8 @@ Simple web app to store my favourites movies/shows and the places I like to go f
 
 I wanted a simple React project that works well on all devices and has a good aesthetic. 
 
+[Check it out!](https://rad-klepon-9a5a05.netlify.app/)
+
 
 
 
