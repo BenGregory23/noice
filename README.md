@@ -9,7 +9,7 @@ I wanted a simple React project that works well on all devices and has a good ae
 
 
 
-https://github.com/BenGregory23/noice/assets/61834092/ee5e8cd6-4318-4c51-a892-1de54c2de249
+
 
 
 
@@ -27,8 +27,15 @@ Production is deployed on Netlify.
 **Current :**
 - Add/Remove a place
 - Add/Remove a movie or a show
+- Light/dark mode toggle
 
 
 **Coming soon :**
-- Light/dark mode toggle
-- User authentication 
+
+- User authentication
+
+** Do whatever you want**
+
+Don't worry about deleting or adding movies, I regularly clean the database with just one command ! 
+
+https://github.com/BenGregory23/noice/assets/61834092/ee5e8cd6-4318-4c51-a892-1de54c2de249
