@@ -87,7 +87,7 @@ const AddMovie = ({dispatch}) => {
 
     return (
         <>
-            <Button color={"success"} onClick={() => setAddModalOpen(true)} sx={{borderRadius: "md", height: 50, width:50, backgroundColor: "#589158"}}>
+            <Button color={"success"} onClick={() => setAddModalOpen(true)} sx={{borderRadius: "md", height: 45, width:45   , backgroundColor: "#589158"}}>
                 <PlusSquareIcon size={24} />
             </Button>
 
