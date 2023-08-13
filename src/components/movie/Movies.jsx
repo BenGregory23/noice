@@ -138,7 +138,15 @@ const Movies = ({mode}) => {
                     }}
                 >
                     
-                    <Input placeholder={"Search"} onChange={searchMovie} />
+                    <Input placeholder={"Search"} onChange={searchMovie} 
+                        sx={{
+                           backgroundColor : mode === "dark" ? "#242424" : "#fff",
+                           color : mode === "dark" ? "#fff" : "#000",
+                         
+                            
+                        }}
+
+                    />
                     <AddMovie dispatch={dispatch}/>
                 </Stack>
             </Stack>
