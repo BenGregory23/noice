@@ -1,4 +1,4 @@
-import {Box, Option, Select, Stack} from "@mui/joy";
+import {Box, Option, Select, Stack, Input} from "@mui/joy";
 import Movie from "./Movie.jsx";
 import AddMovie from "./AddMovie.jsx";
 import { useEffect, useReducer, useState } from "react";
@@ -17,22 +17,7 @@ const movieListStyle = {
 
 }
 
-const genreOptions = [
-    { value: "action", label: "Action" },
-    { value: "adventure", label: "Adventure" },
-    { value: "comedy", label: "Comedy" },
-    { value: "crime", label: "Crime" },
-    { value: "drama", label: "Drama" },
-    { value: "fantasy", label: "Fantasy" },
-    { value: "historical", label: "Historical" },
-    { value: "horror", label: "Horror" },
-    { value: "mystery", label: "Mystery" },
-    { value: "political", label: "Political" },
-    { value: "romance", label: "Romance" },
-    { value: "science-fiction", label: "Science Fiction" },
-    { value: "thriller", label: "Thriller" },
-    { value: "western", label: "Western" },
-];
+
 
 function movieReducer(state, action) {
     switch (action.type) {
@@ -45,17 +30,36 @@ function movieReducer(state, action) {
             return { ...state, movies: action.movies };
         case "SET_DATA_LOADED":
             return { ...state, dataLoaded: action.dataLoaded };
+        case "SET_DISPLAYED_MOVIES":
+            return { ...state, displayedMovies: action.displayedMovies };
         default:
             return state;
     }
 }
 
+
+
 const Movies = ({mode}) => {
     const [state, dispatch] = useReducer(movieReducer, {
         movies: [],
+        displayedMovies: [],
         dataLoaded: false,
     });
 
+    const searchMovie = (event) => {
+        const searchValue = event.target.value;
+        if (searchValue === "") {
+            dispatch({ type: "SET_DISPLAYED_MOVIES", displayedMovies: state.movies });
+            return;
+        }
+        if (searchValue.length < 2) {
+            return;
+        }
+        const displayedMovies = state.movies.filter((movie) => {
+            return movie.title.toLowerCase().includes(searchValue.toLowerCase());
+        });
+        dispatch({ type: "SET_DISPLAYED_MOVIES", displayedMovies: displayedMovies });
+    };
 
     useEffect(() => {
         if (!state.dataLoaded) {
@@ -66,6 +70,7 @@ const Movies = ({mode}) => {
                     console.log(data);
                     dispatch({ type: "ADD_MOVIES", movies: data });
                     dispatch({ type: "SET_DATA_LOADED", dataLoaded: true });
+                    dispatch({ type: "SET_DISPLAYED_MOVIES", displayedMovies: data });
                 });
         }
     }, [state.dataLoaded, dispatch, state.movies]); // Add 'dispatch' to the dependency array
@@ -103,7 +108,7 @@ const Movies = ({mode}) => {
                     sx={movieListStyle}
                 >
                     
-                    {state.movies.map((movie) => (
+                    {state.displayedMovies.map((movie) => (
                         <Movie mode={mode} key={movie._id} movie={movie} dispatch={dispatch}/>
                     ))}
                  
@@ -132,13 +137,8 @@ const Movies = ({mode}) => {
                         }
                     }}
                 >
-                    <Select placeholder={"Genre"}>
-                        {genreOptions.map((option) => (
-                            <Option key={option.value} value={option.value}>
-                                {option.label}
-                            </Option>
-                        ))}
-                    </Select>
+                    
+                    <Input placeholder={"Search"} onChange={searchMovie} />
                     <AddMovie dispatch={dispatch}/>
                 </Stack>
             </Stack>
