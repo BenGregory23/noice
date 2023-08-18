@@ -24,6 +24,9 @@ function foodReducer(state, action) {
         case "REMOVE_FOOD":
             const newFoods = state.foods.filter((food) => food.properties.id !== action.restaurant.properties.id);
             return { ...state, foods: newFoods };
+        case "EDIT_FOOD":
+            const newFoods2 = state.foods.filter((food) => food.properties.id !== action.payload.properties.id);
+            return { ...state, foods: [...newFoods2, action.payload] };    
         case "ADD_FOODS":
             return { ...state, foods: action.foods };
         case "SET_DATA_LOADED":
