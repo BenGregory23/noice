@@ -138,8 +138,7 @@ const AddFood = ({dispatch}) => {
                             </Stack>
                         </FormControl>
 
-                        <Rating value={place.rating} onChange={(e) => setPlace({...place, rating: e.target.value})}/>
-
+ 
                         <Button  color={"success"} onClick={addPlaceToDb}>
                             Ajouter
                         </Button>
