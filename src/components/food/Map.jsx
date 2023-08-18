@@ -17,7 +17,7 @@ const Map = ({foods, selectedRestaurant, dispatch, mode}) => {
                 container: 'map', // container ID
                 //style: 'mapbox://styles/mapbox/streets-v12', // style URL
                 style: mode === "dark" ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/streets-v12',
-                center: [3.1, 45.78], // starting position [lng, lat]
+                center: [0.3333300, 46.5833300], // starting position [lng, lat]
                 zoom: 11, // starting zoom
                 // dark mode
 
