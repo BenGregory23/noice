@@ -1,8 +1,8 @@
 import {Box, Button, List, ListItem, Stack, Typography, Sheet} from "@mui/joy";
 import {useEffect, useState} from "react";
-import Rating from "../Rating.jsx";
 import {XSquare} from "lucide-react";
 import { Beer, Utensils, Orbit, Pizza } from 'lucide-react';
+import EditFood from "./EditFood.jsx";
 
 const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, mode }) => {
     const [isPhone, setIsPhone] = useState(false);
@@ -56,7 +56,7 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
     const typographyStyle = {
         color: mode === "light" ? 'black' : "white",
         fontWeight: '600',
-        width: "70%",
+       
         "@media (max-width: 600px)": {
             fontSize: '1rem',
         }
@@ -122,6 +122,7 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
                             
                                 }}
                             >
+                                <Stack direction={"row"} spacing={3} alignItems={"center"}>
                                 {
                                     food.properties.icon === "fast-food" ?
                                         <Pizza color={iconColor} size={isPhone ? 20 : 24} /> :
@@ -132,24 +133,32 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
                                                 null
 
                                 }
-                                <Typography level={"body1"} fontSize={"1.2rem"} sx={typographyStyle}>
+                                <Typography level={"body1"}  fontSize={"1.2rem"} sx={typographyStyle}>
                                     {food.properties.description}
                                 </Typography>
+                                </Stack>
                                 
+                                <Stack direction={"row"} spacing={0}  justifyContent={"space-between"}>
+                                    <EditFood food={food} dispatch={dispatch} mode={mode} />
+                                    <Button size={isPhone ? "sm" : "md"} 
+                                                variant={"contained"}
+                                                sx={{
+                                                    transition: "all 0.2s ease-in-out",
+                                                    color: mode === "light" ? 'black' : "white",
+                                                    "&:hover": {
+                                                        color: "red",
+                                                    },
+                                                }} 
+                                                onClick={()=>removePlace(food)}
+                                    >
+                                        <XSquare size={isPhone ? 16 : 24} />
+                                    </Button>
+                                </Stack>
                                 
-                                <Button size={isPhone ? "sm" : "md"} 
-                                        variant={"contained"}
-                                        sx={{
-                                            transition: "all 0.2s ease-in-out",
-                                            color: mode === "light" ? 'black' : "white",
-                                            "&:hover": {
-                                                color: "red",
-                                            },
-                                        }} 
-                                        onClick={()=>removePlace(food)}
-                                >
-                                <XSquare size={isPhone ? 16 : 24} />
-                            </Button>
+
+                            
+
+
                                
                             </Stack>
 
