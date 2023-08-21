@@ -1,17 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './css/App.css'
 import {
   Box,
-  CssVarsProvider, Stack, Typography
+  CssVarsProvider
 } from "@mui/joy";
 import Header from "./components/Header";
-import {BrowserRouter as Router, Route, Link, Routes, } from 'react-router-dom';
+import {BrowserRouter as Router, Route,  Routes, } from 'react-router-dom';
 import Home from "./components/Home.jsx";
 import Movies from "./components/movie/Movies.jsx";
 import Food from "./components/food/Food.jsx";
 import NotFound from './components/NotFound.jsx';
 import Choose from "./components/food/choose.jsx";
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 
 
 
@@ -21,11 +20,14 @@ function App() {
     
     const [mode, setMode] = useState('light');
 
-    const darkTheme = createTheme({
-        palette: {
-          mode: mode,
-        },
-      });
+
+
+    useEffect(()=>{
+      fetch("https://radar-my-apps-336125652a2e.herokuapp.com/?source=Noice", {
+        method: "POST",
+      }).then(res => console.log(res))
+    })
+
       
 
     return (
