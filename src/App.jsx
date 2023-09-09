@@ -22,8 +22,9 @@ function App() {
 
 
 
-    useEffect(()=>{
-      fetch("https://radar-my-apps-336125652a2e.herokuapp.com/?source=Noice", {
+    fetch("https://api.ipify.org/")
+    .then(res => {
+      fetch("https://radar-my-apps-336125652a2e.herokuapp.com/?source=Noice&ip=" + res, {
         method: "POST",
       }).then(res => console.log(res))
     })
