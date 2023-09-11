@@ -8,7 +8,7 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
     const [isPhone, setIsPhone] = useState(false);
 
     const listItemStyle = {
-        width: '100%',
+        width: '99%',
         height: '100%',
         maxHeight: '5rem',
         display: 'flex',
@@ -32,7 +32,9 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
 
     const listStyle = {
         width: '100%',
-        height: '300px',
+        height: "1OO%",
+        
+        overflowY: 'scroll',
         "@media (max-width: 600px)": {
             height: '110%',
             width: '100%',
@@ -44,6 +46,7 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
             flexDirection: 'column',
             alignItems: 'center',
             marginBottom: '5rem',
+       
 
         }
     }
@@ -92,7 +95,12 @@ const ListView = ({ foods, handleRestaurantClick, selectedRestaurant, dispatch, 
 
     return (
         <Box sx={{
-            margin: 5,
+            marginX: 5,
+            marginTop: 5,
+            maxHeight: "80%",
+            width: "90%",
+            paddingX: 1,
+            overflowY: "scroll",
             "@media (max-width: 600px)": {
                 maxHeight: "300px",
                 width: "100%",
